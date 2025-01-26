@@ -6,6 +6,30 @@
     <title>Unity Web Player | Asteroid Rush</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+    }
+
+    #unityContainer {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    canvas {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    </style>
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
