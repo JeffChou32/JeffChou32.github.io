@@ -10,22 +10,28 @@
       body {
           margin: 0;
           overflow: hidden;
-          background-color: black;
-      }
-    
-      #unity-container {
+          background-color: rgb(31, 20, 91);
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 100vw;
-          height: 100vh;
+          height: 100vh; /* Fill the full viewport height */
+      }
+    
+      #unity-container {
+          position: relative;
+          width: 100%; /* Scale to browser width */
+          height: 100%; /* Scale to browser height */
+          display: flex;
+          justify-content: center;
+          align-items: center;
       }
     
       #unity-canvas {
-          width: 100%;
-          height: 100%;
-          object-fit: contain; /* Ensures aspect ratio is maintained */
-          background-color: black;
+          width: auto;
+          height: auto;
+          max-width: 100%; /* Ensure canvas fits within the browser width */
+          max-height: 100%; /* Ensure canvas fits within the browser height */
+          aspect-ratio: 9 / 16; /* Maintain 9:16 aspect ratio */
       }
     </style>
   </head>
