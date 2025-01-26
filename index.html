@@ -149,7 +149,39 @@
             };
 
       document.body.appendChild(script);
+      function resizeCanvas() {
+    const canvas = document.querySelector("#unity-canvas");
+    const container = document.querySelector("#unity-container");
 
+    // Get the browser's current width and height
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Calculate the aspect ratio
+    const targetAspect = 9 / 16;
+    const currentAspect = windowWidth / windowHeight;
+
+    // Adjust canvas size based on aspect ratio
+    if (currentAspect > targetAspect) {
+        // Wider than target aspect ratio: limit width
+        container.style.width = `${windowHeight * targetAspect}px`;
+        container.style.height = `${windowHeight}px`;
+    } else {
+        // Taller than target aspect ratio: limit height
+        container.style.width = `${windowWidth}px`;
+        container.style.height = `${windowWidth / targetAspect}px`;
+    }
+
+    // Update canvas dimensions
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+}
+
+// Attach the resize handler to the window resize event
+window.addEventListener("resize", resizeCanvas);
+
+// Initial resize to ensure proper dimensions on page load
+resizeCanvas();
     </script>
   </body>
 </html>
