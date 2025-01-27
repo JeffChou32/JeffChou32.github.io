@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
-      /* Ensure the container spans the entire viewport */
       html, body {
         margin: 0;
         padding: 0;
@@ -55,7 +54,6 @@
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
 
-        // Calculate new canvas dimensions based on aspect ratio
         if (windowWidth / windowHeight > aspectRatio) {
           canvas.width = windowHeight * aspectRatio;
           canvas.height = windowHeight;
@@ -117,6 +115,27 @@
           document.querySelector("#unity-loading-bar").style.display = "none";
           document.querySelector("#unity-fullscreen-button").onclick = () => {
             unityInstance.SetFullscreen(1);
+
+            // Resize canvas for fullscreen mode
+            function resizeForFullscreen() {
+              const aspectRatio = 1080 / 1920;
+              const windowWidth = window.innerWidth;
+              const windowHeight = window.innerHeight;
+
+              if (windowWidth / windowHeight > aspectRatio) {
+                canvas.style.width = `${windowHeight * aspectRatio}px`;
+                canvas.style.height = `${windowHeight}px`;
+              } else {
+                canvas.style.width = `${windowWidth}px`;
+                canvas.style.height = `${windowWidth / aspectRatio}px`;
+              }
+
+              canvas.style.marginTop = `${(windowHeight - canvas.offsetHeight) / 2}px`;
+              canvas.style.marginLeft = `${(windowWidth - canvas.offsetWidth) / 2}px`;
+            }
+
+            resizeForFullscreen();
+            window.addEventListener("resize", resizeForFullscreen);
           };
         }).catch((message) => {
           alert(message);
