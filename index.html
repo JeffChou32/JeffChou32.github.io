@@ -34,33 +34,54 @@
     </div>
     <script src="Build/Asteroid Rush WEB.loader.js"></script>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+      function resizeCanvas() {
+        const canvas = document.querySelector("#unity-canvas");
+        const container = document.querySelector("#unity-container");
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
 
-        document.body.style.textAlign = "left";
+        // Maintain aspect ratio
+        const gameWidth = 1080; // Original game width
+        const gameHeight = 1920; // Original game height
+        const aspectRatio = gameWidth / gameHeight;
+
+        if (windowWidth / windowHeight > aspectRatio) {
+          // Window is wider than the game, scale based on height
+          canvas.style.width = `${windowHeight * aspectRatio}px`;
+          canvas.style.height = `${windowHeight}px`;
+        } else {
+          // Window is taller than the game, scale based on width
+          canvas.style.width = `${windowWidth}px`;
+          canvas.style.height = `${windowWidth / aspectRatio}px`;
+        }
       }
-
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        arguments: [],
-        dataUrl: "Build/Asteroid Rush WEB.data.unityweb",
-        frameworkUrl: "Build/Asteroid Rush WEB.framework.js.unityweb",
-        codeUrl: "Build/Asteroid Rush WEB.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "Jeff Chou",
-        productName: "Asteroid Rush",
-        productVersion: "0.1",
+      window.addEventListener("resize", resizeCanvas);
+      window.addEventListener("load", () => {
+        resizeCanvas();
+        createUnityInstance(document.querySelector("#unity-canvas"), {
+          arguments: [],
+          dataUrl: "Build/Asteroid Rush WEB.data.unityweb",
+          frameworkUrl: "Build/Asteroid Rush WEB.framework.js.unityweb",
+          codeUrl: "Build/Asteroid Rush WEB.wasm.unityweb",
+          streamingAssetsUrl: "StreamingAssets",
+          companyName: "Jeff Chou",
+          productName: "Asteroid Rush",
+          productVersion: "0.1",
+        });
+      });
+      // createUnityInstance(document.querySelector("#unity-canvas"), {
+      //   arguments: [],
+      //   dataUrl: "Build/Asteroid Rush WEB.data.unityweb",
+      //   frameworkUrl: "Build/Asteroid Rush WEB.framework.js.unityweb",
+      //   codeUrl: "Build/Asteroid Rush WEB.wasm.unityweb",
+      //   streamingAssetsUrl: "StreamingAssets",
+      //   companyName: "Jeff Chou",
+      //   productName: "Asteroid Rush",
+      //   productVersion: "0.1",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+      //});
     </script>
   </body>
 </html>
