@@ -57,19 +57,17 @@
         }
       }
 
-      window.addEventListener("resize", resizeCanvas);
-      window.addEventListener("load", () => {
-        resizeCanvas();
-        createUnityInstance(document.querySelector("#unity-canvas"), {
-          arguments: [],
-          dataUrl: "Build/Asteroid Rush Github.data.unityweb",
-          frameworkUrl: "Build/Asteroid Rush Github.framework.js.unityweb",
-          codeUrl: "Build/Asteroid Rush Github.wasm.unityweb",
-          streamingAssetsUrl: "StreamingAssets",
-          companyName: "Jeff Chou",
-          productName: "Asteroid Rush",
-          productVersion: "0.1",
-        });
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        arguments: [],
+        dataUrl: "Build/Asteroid Rush WEB.data.unityweb",
+        frameworkUrl: "Build/Asteroid Rush WEB.framework.js.unityweb",
+        codeUrl: "Build/Asteroid Rush WEB.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Jeff Chou",
+        productName: "Asteroid Rush",
+        productVersion: "0.1",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
       });
     </script>
   </body>
